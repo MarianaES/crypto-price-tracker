@@ -74,10 +74,13 @@ export default function CryptoPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-xl font-medium mb-5 text-center">Crypto Prices</h1>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+      <h1 className="text-xl font-medium mb-5 text-center text-gray-800 dark:text-gray-100">
+        Crypto Prices
+      </h1>
+
       <div className="max-w-2xl mx-auto mb-4 flex gap-2">
-        <div className="flex-grow relative">
+        <div className="flex-grow">
           <Search onSearch={setSearchTerm} />
         </div>
         <button
@@ -85,47 +88,21 @@ export default function CryptoPage() {
           disabled={isValidating}
           className="px-4 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600 disabled:bg-blue-300 transition-colors h-[38px] min-w-[90px] flex items-center justify-center"
         >
-          {isValidating ? (
-            <span className="flex items-center">
-              <svg
-                className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-              Refreshing
-            </span>
-          ) : (
-            "Refresh"
-          )}
+          {isValidating ? "Refreshing..." : "Refresh"}
         </button>
       </div>
 
-      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow">
+      <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-gray-100">
-              <th className="py-2 px-3 text-left text-gray-500 font-medium text-xs">
+            <tr className="border-b border-gray-100 dark:border-gray-700">
+              <th className="py-2 px-3 text-left text-gray-500 dark:text-gray-400 font-medium text-xs">
                 Coin
               </th>
-              <th className="py-2 px-3 text-right text-gray-500 font-medium text-xs">
+              <th className="py-2 px-3 text-right text-gray-500 dark:text-gray-400 font-medium text-xs">
                 Price
               </th>
-              <th className="py-2 px-3 text-right text-gray-500 font-medium text-xs">
+              <th className="py-2 px-3 text-right text-gray-500 dark:text-gray-400 font-medium text-xs">
                 24h
               </th>
             </tr>
@@ -139,29 +116,31 @@ export default function CryptoPage() {
                 return (
                   <tr
                     key={crypto.id}
-                    className="border-b border-gray-50 hover:bg-gray-50 transition-colors duration-150"
+                    className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150"
                   >
                     <td className="py-2 px-3">
                       <div className="flex items-center">
-                        <span className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center mr-2 text-xs">
+                        <span className="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center mr-2 text-xs dark:text-gray-300">
                           {crypto.symbol.charAt(0)}
                         </span>
                         <div>
-                          <div className="font-medium text-sm">
+                          <div className="font-medium text-sm text-gray-900 dark:text-white">
                             {crypto.name}
                           </div>
-                          <div className="text-xs text-gray-400">
+                          <div className="text-xs text-gray-400 dark:text-gray-500">
                             {crypto.symbol}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="py-2 px-3 text-right font-medium text-sm">
+                    <td className="py-2 px-3 text-right font-medium text-sm text-gray-900 dark:text-white">
                       {formatCurrency(crypto.priceUsd)}
                     </td>
                     <td
                       className={`py-2 px-3 text-right text-xs ${
-                        isPositive ? "text-green-600" : "text-red-600"
+                        isPositive
+                          ? "text-green-600 dark:text-green-400"
+                          : "text-red-600 dark:text-red-400"
                       }`}
                     >
                       {isPositive ? "↑" : "↓"}{" "}
@@ -172,7 +151,10 @@ export default function CryptoPage() {
               })
             ) : (
               <tr>
-                <td colSpan={3} className="py-4 text-center text-gray-500">
+                <td
+                  colSpan={3}
+                  className="py-4 px-3 text-center text-gray-400 dark:text-gray-500"
+                >
                   No cryptocurrencies found
                 </td>
               </tr>
@@ -182,7 +164,7 @@ export default function CryptoPage() {
       </div>
 
       <div className="flex justify-center items-center max-w-2xl mx-auto mt-3">
-        <div className="text-gray-400 text-xs">
+        <div className="text-gray-400 dark:text-gray-500 text-xs">
           Last updated on {lastUpdated}
         </div>
       </div>
