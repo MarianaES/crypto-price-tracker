@@ -2,7 +2,7 @@
 
 A cryptocurrency price tracking application built with Next.js and SWR. Track real-time prices of top 5 cryptocurrencies.
 
-![Crypto Price Tracker Screenshot](docs/screenshot.png)
+![Crypto Price Tracker Screenshot](assets/screenshot.png)
 
 ## Features
 
